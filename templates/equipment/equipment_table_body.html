@@ -1,0 +1,21 @@
+{% for equipment in equipment_list %}
+    <tr>
+        <td>{{ equipment.name }}</td>
+        <td>{{ equipment.model }}</td>
+        <td>{{ equipment.manufacturer }}</td>
+        <td>{{ equipment.serial_number }}</td>
+        <td>{{ equipment.internal_code }}</td>
+        <td>{{ equipment.location }}</td>
+        <td>{{ equipment.responsible_person }}</td>
+        <td>{{ equipment.purchase_date }}</td>
+        <td>{{ equipment.commissioning_date }}</td>
+        <td>{% if equipment.status %}In Use{% else %}Not in Use{% endif %}</td>
+        <td>
+            <a href="{% url 'equipment_detail' equipment.id %}" class="btn btn-primary btn-sm">View Details</a>
+        </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="11" class="text-center">No equipment found.</td>
+    </tr>
+{% endfor %}

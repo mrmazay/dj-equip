@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load custom_filters %}  <!-- Загрузка фильтров -->
+
+{% block title %}Harmonohram{% endblock %}
+
+{% block content %}
+<h1>Harmonohram {{ year }}</h1>
+
+<form method="get" class="form-inline">
+    <label for="year">Rok:</label>
+    <input type="number" name="year" value="{{ year }}" class="form-control mx-2" min="2000">
+    <button type="submit" class="btn btn-primary">Wygenerowac</button>
+</form>
+
+{% for maintenance_type, data in maintenance_calendars.items %}
+    <h2>{{ data.name }}</h2>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                {% for month_num in month_numbers %}
+                    <th>{{ month_num }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipment, months_data in data.calendar.items %}
+            <tr>
+                <td>{{ equipment.name }}</td>
+                {% for month_num in month_numbers %}
+                    <td>
+                        {% if months_data|get_value_from_dict:month_num %}
+                            {% for date in months_data|get_value_from_dict:month_num %}
+                                {{ date|date:"d" }}<br>
+                            {% endfor %}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endfor %}
+{% endblock %}

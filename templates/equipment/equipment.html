@@ -1,0 +1,23 @@
+<h2>Список оборудования</h2>
+<table>
+  <tr>
+    <th>Название</th>
+    <th>Модель</th>
+    <th>Производитель</th>
+    <th>Серийный номер</th>
+    <th>Код</th>
+    <th>Расположение</th>
+    <th>Детали</th>
+  </tr>
+  {% for eq in equipment %}
+    <tr>
+      <td>{{ eq.name }}</td>
+      <td>{{ eq.model }}</td>
+      <td>{{ eq.manufacturer }}</td>
+      <td>{{ eq.serial_number }}</td>
+      <td>{{ eq.internal_code }}</td>
+      <td>{{ eq.location }}</td>
+      <td><a href="{% url 'equipment_detail' eq.pk %}">Подробнее</a></td>
+    </tr>
+  {% endfor %}
+</table>

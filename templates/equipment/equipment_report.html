@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Wykaz wyposazenia{% endblock %}
+
+{% block content %}
+<h1>Wykaz wyposazenia {{ report_date }}</h1>
+
+<form method="get" class="form-inline">
+    <label for="date">Data:</label>
+    <input type="date" name="date" value="{{ report_date }}" class="form-control mx-2">
+    <button type="submit" class="btn btn-primary">Wygenerowac</button>
+</form>
+
+<table class="table table-striped mt-4">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Model</th>
+            <th>Producent</th>
+            <th>Numer seryjny</th>
+            <th>Kod</th>
+            <th>Lokalizacja</th>
+            <th>Odpowiedzialna osoba</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for equipment in equipments %}
+        <tr>
+            <td>{{ equipment.name }}</td>
+            <td>{{ equipment.model }}</td>
+            <td>{{ equipment.manufacturer }}</td>
+            <td>{{ equipment.serial_number }}</td>
+            <td>{{ equipment.code }}</td>
+            <td>{{ equipment.location }}</td>
+            <td>{{ equipment.responsible_person }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

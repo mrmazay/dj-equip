@@ -1,0 +1,29 @@
+<h1>Список оборудования</h1>
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Фильтровать</button>
+</form>
+<a href="{% url 'equipment_create' %}" class="btn btn-success mb-3">Добавить оборудование</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Модель</th>
+            <th>Производитель</th>
+            <th>Отдел</th>
+            <th>Статус</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for equipment in equipments %}
+        <tr>
+            <td>{{ equipment.name }}</td>
+            <td>{{ equipment.model }}</td>
+            <td>{{ equipment.manufacturer }}</td>
+            <td>{{ equipment.get_department_display }}</td>
+            <td>{{ equipment.get_status_display }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
